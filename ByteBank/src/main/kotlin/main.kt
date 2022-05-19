@@ -1,10 +1,14 @@
 class Conta {
     var titular = ""
     var numero = 0
-    private var saldo = 0.0
+    var saldo = 0.0
+        private set
+
 
     fun deposita(valor: Double) {
-        this.saldo += valor
+        if (valor > 0) {
+            this.saldo += valor
+        }
     }
 
     fun saca(valor: Double) {
@@ -24,14 +28,14 @@ class Conta {
         return false
     }
 
-    fun getSaldo(): Double {
-        return saldo
-    }
-    fun setSaldo(valor: Double) {
-        if (valor > 0) {
-            saldo = valor
-        }
-    }
+//    fun getSaldo(): Double {
+//        return saldo
+//    }
+//    fun setSaldo(valor: Double) {
+//        if (valor > 0) {
+//            saldo = valor
+//        }
+//    }
 }
 
 fun main() {
@@ -44,35 +48,35 @@ private fun testaCopias() {
     val contaAlex = Conta()
     contaAlex.titular = "Alex"
     contaAlex.numero = 100
-    contaAlex.setSaldo(100.00)
+    contaAlex.deposita(100.00)
 
     val contaFran = Conta()
     contaFran.titular = "Fran"
     contaFran.numero = 101
-    contaFran.setSaldo(500.00)
+    contaFran.deposita(500.00)
 
     println(contaAlex.titular)
     println(contaAlex.numero)
-    println(contaAlex.getSaldo())
+    println(contaAlex.saldo)
     println(contaFran.titular)
     println(contaFran.numero)
-    println(contaFran.getSaldo())
+    println(contaFran.saldo)
 
     println("depositando na conta do Alex")
     contaAlex.deposita(50.0)
-    println(contaAlex.getSaldo())
+    println(contaAlex.saldo)
 
     println("depositando na conta do Fran")
     contaFran.deposita(75.0)
-    println(contaFran.getSaldo())
+    println(contaFran.saldo)
 
     println("sacando na conta do Alex")
     contaAlex.saca(151.0)
-    println(contaAlex.getSaldo())
+    println(contaAlex.saldo)
 
     println("sacando na conta do Fran")
     contaFran.saca(100.0)
-    println(contaFran.getSaldo())
+    println(contaFran.saldo)
 
     println("Fran transfere 100 para Alex")
     if (contaFran.transfere(contaAlex, 100.0)) {
@@ -80,8 +84,8 @@ private fun testaCopias() {
     } else {
         println("Tranferencia mal sucedida")
     }
-    println("saldo Fran: ${contaFran.getSaldo()}")
-    println("saldo Alex: ${contaAlex.getSaldo()}")
+    println("saldo Fran: ${contaFran.saldo}")
+    println("saldo Alex: ${contaAlex.saldo}")
 
 }
 
