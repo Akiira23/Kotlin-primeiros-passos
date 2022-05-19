@@ -1,52 +1,98 @@
 class Conta {
     var titular = ""
     var numero = 0
-    var saldo = 0.0
+    private var saldo = 0.0
+
+    fun deposita(valor: Double) {
+        this.saldo += valor
+    }
+
+    fun saca(valor: Double) {
+        if (saldo >= valor) {
+            saldo -= valor
+        } else {
+            println("saldo invalido.")
+        }
+    }
+
+    fun transfere(destino: Conta, valor: Double): Boolean {
+        if (saldo >= valor) {
+            saldo -= valor
+            destino.deposita(valor)
+            return true
+        }
+        return false
+    }
+
+    fun getSaldo(): Double {
+        return saldo
+    }
+    fun setSaldo(valor: Double) {
+        if (valor > 0) {
+            saldo = valor
+        }
+    }
 }
 
 fun main() {
     println("Bem vindo ao ByteBank!")
 
-    testaCopiasEReferencias()
-
+    testaCopias()
 }
 
-private fun testaCopiasEReferencias() {
+private fun testaCopias() {
     val contaAlex = Conta()
     contaAlex.titular = "Alex"
     contaAlex.numero = 100
-    contaAlex.saldo = 100.00
+    contaAlex.setSaldo(100.00)
 
     val contaFran = Conta()
     contaFran.titular = "Fran"
     contaFran.numero = 101
-    contaFran.saldo = 500.00
+    contaFran.setSaldo(500.00)
 
     println(contaAlex.titular)
     println(contaAlex.numero)
-    println(contaAlex.saldo)
+    println(contaAlex.getSaldo())
     println(contaFran.titular)
     println(contaFran.numero)
-    println(contaFran.saldo)
+    println(contaFran.getSaldo())
 
     println("depositando na conta do Alex")
-    deposita(contaAlex, 50.0)
-    println(contaAlex.saldo)
-    println("depositando na conta do Fran")
-    deposita(contaFran, 75.0)
-    println(contaFran.saldo)
+    contaAlex.deposita(50.0)
+    println(contaAlex.getSaldo())
 
-//    val contaJoao = Conta()
-//    contaJoao.titular = "Joao"
-//    var contaMaria = contaJoao
-//    contaMaria.titular = "Maria"
-//
-//    println("titular conta joao: ${contaJoao.titular}")
-//    println("titular conta maria: ${contaMaria.titular}")
+    println("depositando na conta do Fran")
+    contaFran.deposita(75.0)
+    println(contaFran.getSaldo())
+
+    println("sacando na conta do Alex")
+    contaAlex.saca(151.0)
+    println(contaAlex.getSaldo())
+
+    println("sacando na conta do Fran")
+    contaFran.saca(100.0)
+    println(contaFran.getSaldo())
+
+    println("Fran transfere 100 para Alex")
+    if (contaFran.transfere(contaAlex, 100.0)) {
+        println("Tranferencia bem sucedida")
+    } else {
+        println("Tranferencia mal sucedida")
+    }
+    println("saldo Fran: ${contaFran.getSaldo()}")
+    println("saldo Alex: ${contaAlex.getSaldo()}")
+
 }
 
-fun deposita(conta: Conta, valor: Double) {
-    conta.saldo += valor
+private fun referencias() {
+    val contaJoao = Conta()
+    contaJoao.titular = "Joao"
+    var contaMaria = contaJoao
+    contaMaria.titular = "Maria"
+
+    println("titular conta joao: ${contaJoao.titular}")
+    println("titular conta maria: ${contaMaria.titular}")
 }
 
 private fun testaRepeticao() {
