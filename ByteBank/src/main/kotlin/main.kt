@@ -1,8 +1,14 @@
-class Conta {
-    var titular = ""
-    var numero = 0
+class Conta(
+    var titular: String,
+    var numero: Int
+) {
     var saldo = 0.0
         private set
+
+//    constructor(titular: String, numero: Int) {
+//        this.titular = titular
+//        this.numero = numero
+//    }
 
 
     fun deposita(valor: Double) {
@@ -45,14 +51,10 @@ fun main() {
 }
 
 private fun testaCopias() {
-    val contaAlex = Conta()
-    contaAlex.titular = "Alex"
-    contaAlex.numero = 100
+    val contaAlex = Conta("Alex", 100)
     contaAlex.deposita(100.00)
 
-    val contaFran = Conta()
-    contaFran.titular = "Fran"
-    contaFran.numero = 101
+    val contaFran = Conta("Fran", 101)
     contaFran.deposita(500.00)
 
     println(contaAlex.titular)
@@ -90,8 +92,7 @@ private fun testaCopias() {
 }
 
 private fun referencias() {
-    val contaJoao = Conta()
-    contaJoao.titular = "Joao"
+    val contaJoao = Conta("Joao", 1)
     var contaMaria = contaJoao
     contaMaria.titular = "Maria"
 
