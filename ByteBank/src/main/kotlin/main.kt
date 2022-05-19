@@ -1,6 +1,6 @@
 class Conta(
     var titular: String,
-    var numero: Int
+    val numero: Int = 0  //valor padrao
 ) {
     var saldo = 0.0
         private set
@@ -51,10 +51,10 @@ fun main() {
 }
 
 private fun testaCopias() {
-    val contaAlex = Conta("Alex", 100)
+    val contaAlex = Conta(titular = "Alex", numero = 100)
     contaAlex.deposita(100.00)
 
-    val contaFran = Conta("Fran", 101)
+    val contaFran = Conta(titular = "Fran", numero = 101)
     contaFran.deposita(500.00)
 
     println(contaAlex.titular)
@@ -93,7 +93,7 @@ private fun testaCopias() {
 
 private fun referencias() {
     val contaJoao = Conta("Joao", 1)
-    var contaMaria = contaJoao
+    val contaMaria = contaJoao
     contaMaria.titular = "Maria"
 
     println("titular conta joao: ${contaJoao.titular}")
@@ -106,7 +106,7 @@ private fun testaRepeticao() {
         if (i == 3) break
         val titular = "Alex $i"
         val numeroConta = 1000 + i
-        var saldo = 100.0 + 10.0 * i
+        val saldo = 100.0 + 10.0 * i
 
         println("titular: $titular")
         println("numero da conta: $numeroConta")
