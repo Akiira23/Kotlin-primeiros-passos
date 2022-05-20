@@ -1,5 +1,5 @@
 fun referencias() {
-    val contaJoao = Conta("Joao", 1)
+    val contaJoao = ContaPoupanca("Joao", 1)
     val contaMaria = contaJoao
     contaMaria.titular = "Maria"
 

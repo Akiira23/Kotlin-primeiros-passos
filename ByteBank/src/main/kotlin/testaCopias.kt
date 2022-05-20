@@ -1,8 +1,8 @@
 fun testaCopias() {
-    val contaAlex = Conta(titular = "Alex", numero = 100)
+    val contaAlex = ContaPoupanca(titular = "Alex", numero = 100)
     contaAlex.deposita(100.00)
 
-    val contaFran = Conta(titular = "Fran", numero = 101)
+    val contaFran = ContaCorrente(titular = "Fran", numero = 101)
     contaFran.deposita(500.00)
 
     println(contaAlex.titular)
