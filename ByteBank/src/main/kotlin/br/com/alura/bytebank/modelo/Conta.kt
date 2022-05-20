@@ -9,7 +9,6 @@ abstract class Conta(
 ) {
     var saldo = 0.0
         protected set
-    var total = 0
 
     init {             //executa o codigo no momento em que a classe eh construida
         totalContas++
