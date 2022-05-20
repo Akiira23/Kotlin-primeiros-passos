@@ -22,4 +22,5 @@ fun testaAutenticacao() {
     sistemaInterno.entra(gerente, 123)
     sistemaInterno.entra(diretora, 123)
     sistemaInterno.entra(cliente, 1234)
+
 }
