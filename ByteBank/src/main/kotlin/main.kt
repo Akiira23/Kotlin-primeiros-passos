@@ -27,6 +27,25 @@ fun main() {
     } else {
         println("nao autenticado")
     }
+
+    val gui = Diretor(
+        nome = "Gui",
+        cpf = "125.762.242-81",
+        salario = 5500.00,
+        senha = 123,
+        plr = 200.0
+    )
+    println()
+    println("nome: ${gui.nome}")
+    println("cpf: ${gui.cpf}")
+    println("salario: ${gui.salario}")
+    println("bonificacao: ${gui.bonificacao()}")
+    println("PLR: ${gui.plr}")
+    if (gui.autentica(1234)) {
+        println("autenticado")
+    } else {
+        println("nao autenticado")
+    }
 }
 
 
