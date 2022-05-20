@@ -1,6 +1,6 @@
 import br.com.alura.bytebank.modelo.Autenticavel
+import br.com.alura.bytebank.modelo.Conta
 import br.com.alura.bytebank.modelo.SistemaInterno
-import br.com.alura.bytebank.modelo.totalContas
 
 fun main() {
     println("Bem vindo ao ByteBank!")
@@ -16,7 +16,7 @@ fun main() {
     val sistemaInterno = SistemaInterno()
     sistemaInterno.entra(fran, 111)
     println("nome: ${fran.nome}")
-    
+
     testaContasDiferentes()
-    println("total de contas: $totalContas")
+    println("total de contas: ${Conta.total}")
 }

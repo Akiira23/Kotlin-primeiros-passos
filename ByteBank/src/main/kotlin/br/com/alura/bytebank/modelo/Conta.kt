@@ -1,8 +1,5 @@
 package br.com.alura.bytebank.modelo
 
-var totalContas = 0
-    private set
-
 abstract class Conta(
     var titular: Cliente,
     val numero: Int = 0  //valor padrao
@@ -10,8 +7,13 @@ abstract class Conta(
     var saldo = 0.0
         protected set
 
+    companion object {            //companion object, eh como se fossse um membro da classe
+        var total = 0
+            private set
+    }
+
     init {             //executa o codigo no momento em que a classe eh construida
-        totalContas++
+        total++
     }
 
     fun deposita(valor: Double) {
