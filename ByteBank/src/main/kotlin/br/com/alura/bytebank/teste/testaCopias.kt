@@ -1,11 +1,12 @@
+import br.com.alura.bytebank.modelo.Cliente
 import br.com.alura.bytebank.modelo.ContaCorrente
 import br.com.alura.bytebank.modelo.ContaPoupanca
 
 fun testaCopias() {
-    val contaAlex = ContaPoupanca(titular = "Alex", numero = 100)
+    val contaAlex = ContaPoupanca(Cliente("Alex", "111111", senha = 123), numero = 100)
     contaAlex.deposita(100.00)
 
-    val contaFran = ContaCorrente(titular = "Fran", numero = 101)
+    val contaFran = ContaCorrente(Cliente("Fran", "2222222", senha = 123), numero = 101)
     contaFran.deposita(500.00)
 
     println(contaAlex.titular)

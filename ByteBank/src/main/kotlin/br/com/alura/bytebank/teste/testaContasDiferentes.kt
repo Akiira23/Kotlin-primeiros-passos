@@ -1,19 +1,20 @@
-import br.com.alura.bytebank.modelo.ContaCorrente
-import br.com.alura.bytebank.modelo.ContaPoupanca
-import br.com.alura.bytebank.modelo.ContaSalario
+import br.com.alura.bytebank.modelo.*
 
 fun testaContasDiferentes() {
-    val contaCorrente = ContaCorrente("Alex", 1000)
-    val contaPoupanca = ContaPoupanca("Fran", 1001)
-    val contaSalario = ContaSalario("Teste", 1001)
+
+
+    val contaCorrente = ContaCorrente(Cliente("Alex", "111111", senha = 123), 1000)
+    val contaPoupanca = ContaPoupanca(Cliente("Fran", "222222", senha = 123), 1001)
+    val contaSalario = ContaSalario(Cliente("Teste", "3333333", senha = 123, endereco = Endereco(logradouro = "Rua Vergueiro")), 1002)
 
     contaCorrente.deposita(1000.0)
     contaPoupanca.deposita(1000.0)
     contaSalario.deposita(2000.0)
 
-    println("conta corrente: ${contaCorrente.saldo}")
-    println("conta poupanca: ${contaPoupanca.saldo}")
-    println("conta salario: ${contaSalario.saldo}")
+    println("conta corrente ${contaCorrente.titular.nome}: ${contaCorrente.saldo}")
+    println("conta poupanca ${contaPoupanca.titular.nome}: ${contaPoupanca.saldo}")
+    println("conta salario ${contaSalario.titular.nome}: ${contaSalario.saldo}")
+    println("conta salario rua: ${contaSalario.titular.endereco.logradouro}")
 
     contaCorrente.saca(100.0)
     contaPoupanca.saca(100.0)
