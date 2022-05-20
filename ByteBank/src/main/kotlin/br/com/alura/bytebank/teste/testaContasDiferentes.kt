@@ -33,4 +33,6 @@ fun testaContasDiferentes() {
 
     println("conta corrente recebe 100: ${contaCorrente.saldo}")
     println("conta poupanca transfere 100: ${contaPoupanca.saldo}")
+
+    //println("total de contas: ${contaSalario.total}")
 }
