@@ -1,56 +1,29 @@
 fun main() {
     println("Bem vindo ao ByteBank!")
     println()
-    val alex = Funcionario(
-        nome = "Alex",
-        cpf = "444.111.222-33",
-        salario = 1500.00
-    )
-    println("nome: ${alex.nome}")
-    println("cpf: ${alex.cpf}")
-    println("salario: ${alex.salario}")
-    println("bonificacao: ${alex.bonificacao()}")
-    println()
 
-    val fran = Gerente(
-        nome = "Fran",
-        cpf = "555.222.232-55",
-        salario = 2500.00,
-        senha = 1234
-    )
-    println("nome: ${fran.nome}")
-    println("cpf: ${fran.cpf}")
-    println("salario: ${fran.salario}")
-    println("bonificacao: ${fran.bonificacao()}")
-    if (fran.autentica(1234)) {
-        println("autenticado")
-    } else {
-        println("nao autenticado")
-    }
+    val contaCorrente = ContaCorrente("Alex", 1000)
+    val contaPoupanca = ContaPoupanca("Fran", 1001)
 
-    val gui = Diretor(
-        nome = "Gui",
-        cpf = "125.762.242-81",
-        salario = 5500.00,
-        senha = 123,
-        plr = 200.0
-    )
-    println()
-    println("nome: ${gui.nome}")
-    println("cpf: ${gui.cpf}")
-    println("salario: ${gui.salario}")
-    println("bonificacao: ${gui.bonificacao()}")
-    println("PLR: ${gui.plr}")
-    if (gui.autentica(1234)) {
-        println("autenticado")
-    } else {
-        println("nao autenticado")
-    }
+    contaCorrente.deposita(1000.0)
+    contaPoupanca.deposita(1000.0)
+
+    println("conta corrente: ${contaCorrente.saldo}")
+    println("conta poupanca: ${contaPoupanca.saldo}")
+
+    contaCorrente.saca(100.0)
+    contaPoupanca.saca(100.0)
+
+    println("conta corrente: ${contaCorrente.saldo}")
+    println("conta poupanca: ${contaPoupanca.saldo}")
+
+    contaCorrente.transfere(contaPoupanca, 100.0)
+
+    println("conta corrente transfere 100: ${contaCorrente.saldo}")
+    println("conta poupanca recebe 100: ${contaPoupanca.saldo}")
+
+    contaPoupanca.transfere(contaCorrente, 100.0)
+
+    println("conta corrente recebe 100: ${contaCorrente.saldo}")
+    println("conta poupanca transfere 100: ${contaPoupanca.saldo}")
 }
-
-
-
-
-
-
-
