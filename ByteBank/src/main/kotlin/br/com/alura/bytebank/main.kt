@@ -5,9 +5,10 @@ fun main() {
     println()
 
 
-    val endereco = Endereco(logradouro = "Rua Vergueiro", numero = 715, complemento = "apto 312", estado = "Sao Paulo")
-    val enderecoNovo = Endereco(logradouro = "Av. Paulista", numero = 2012, cidade = "Sao Paulo")
-    println(endereco.equals(endereco))
+    val endereco = Endereco(logradouro = "Rua Vergueiro", numero = 715, complemento = "apto 312", estado = "Sao Paulo", cep = "0000")
+    val enderecoNovo = Endereco(logradouro = "Av. Paulista", numero = 2012, cidade = "Sao Paulo", cep = "0000")
+
+    println(endereco.equals(enderecoNovo))
     println(endereco.hashCode())
     println(enderecoNovo.hashCode())
     println(endereco.toString())
