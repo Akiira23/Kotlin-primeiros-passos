@@ -1,10 +1,11 @@
+import br.com.alura.bytebank.exception.FalhaAutenticacaoException
 import br.com.alura.bytebank.exception.SaldoInsuficienteException
 import br.com.alura.bytebank.modelo.Cliente
 import br.com.alura.bytebank.modelo.ContaCorrente
 import br.com.alura.bytebank.modelo.ContaPoupanca
 
 fun testaCopias() {
-    val contaAlex = ContaPoupanca(Cliente("Alex", "111111", senha = 123), numero = 100)
+    val contaAlex = ContaPoupanca(Cliente("Alex", "111111", senha = 1234), numero = 100)
     contaAlex.deposita(100.00)
 
     val contaFran = ContaCorrente(Cliente("Fran", "2222222", senha = 123), numero = 101)
@@ -40,11 +41,18 @@ fun testaCopias() {
     println("Fran transfere 100 para Alex")
 
     try {
-        contaFran.transfere(contaAlex, 100.0)
+        contaFran.transfere(contaAlex, 100.0, 123)
         println("Tranferencia bem sucedida")
     } catch (e: SaldoInsuficienteException) {
         println("Tranferencia mal sucedida")
         println("Saldo insuficiente")
+        e.printStackTrace()
+    } catch (e: FalhaAutenticacaoException) {
+        println("Tranferencia mal sucedida")
+        println("Senha incorreta")
+        e.printStackTrace()
+    } catch (e: Exception) {
+        println("erro desconhecido")
         e.printStackTrace()
     }
 

@@ -14,4 +14,8 @@ class ContaSalario(
             println("saldo invalido.")
         }
     }
+
+    override fun autentica(senha: Int): Boolean {
+        return titular.autentica(senha)
+    }
 }
