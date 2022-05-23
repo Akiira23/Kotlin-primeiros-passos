@@ -1,5 +1,7 @@
 package br.com.alura.bytebank.modelo
 
+import br.com.alura.bytebank.exception.SaldoInsuficienteException
+
 class ContaPoupanca(
     titular: Cliente,
     numero: Int
@@ -15,12 +17,11 @@ class ContaPoupanca(
         }
     }
 
-    override fun transfere(destino: Conta, valor: Double): Boolean {
-        if (saldo >= valor) {
-            saldo -= valor
-            destino.deposita(valor)
-            return true
+    override fun transfere(destino: Conta, valor: Double) {
+        if (saldo < valor) {
+            throw SaldoInsuficienteException()
         }
-        return false
+        saldo -= valor
+        destino.deposita(valor)
     }
 }

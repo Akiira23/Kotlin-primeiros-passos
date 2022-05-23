@@ -1,5 +1,5 @@
 package br.com.alura.bytebank.modelo
 
 interface Transferivel {
-    fun transfere(destino: Conta, valor: Double): Boolean
+    fun transfere(destino: Conta, valor: Double)
 }

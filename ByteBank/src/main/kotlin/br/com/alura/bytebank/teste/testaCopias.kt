@@ -1,3 +1,4 @@
+import br.com.alura.bytebank.exception.SaldoInsuficienteException
 import br.com.alura.bytebank.modelo.Cliente
 import br.com.alura.bytebank.modelo.ContaCorrente
 import br.com.alura.bytebank.modelo.ContaPoupanca
@@ -24,20 +25,30 @@ fun testaCopias() {
     contaFran.deposita(75.0)
     println(contaFran.saldo)
 
-    println("sacando na conta do Alex")
+    println()
+
+    println("sacando na conta do Alex 151")
     contaAlex.saca(151.0)
     println(contaAlex.saldo)
 
-    println("sacando na conta do Fran")
+    println("sacando na conta do Fran 100")
     contaFran.saca(100.0)
     println(contaFran.saldo)
 
+    println()
+
     println("Fran transfere 100 para Alex")
-    if (contaFran.transfere(contaAlex, 100.0)) {
+
+    try {
+        contaFran.transfere(contaAlex, 100.0)
         println("Tranferencia bem sucedida")
-    } else {
+    } catch (e: SaldoInsuficienteException) {
         println("Tranferencia mal sucedida")
+        println("Saldo insuficiente")
+        e.printStackTrace()
     }
+
+
     println("saldo Fran: ${contaFran.saldo}")
     println("saldo Alex: ${contaAlex.saldo}")
 

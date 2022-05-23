@@ -1,4 +1,4 @@
-import br.com.alura.bytebank.modelo.Endereco
+import br.com.alura.bytebank.exception.SaldoInsuficienteException
 
 fun main() {
     funcaoMain()
@@ -6,52 +6,30 @@ fun main() {
 
 private fun funcaoMain() {
     println("início main")
+    testaCopias()
 
-    val entrada: String = "1,9"
-    val valor: Double? = try {
-        entrada.toDouble()
-    } catch (e: java.lang.NumberFormatException) {
-        println("Problema na conversao")
-        e.printStackTrace()
-        null
-    }
-
-    val valorComTaxa: Double? = if (valor != null){
-        valor + 0.3
-    } else {
-        null
-    }
-
-    if (valorComTaxa != null) {
-        println("valor recebido: $valorComTaxa")
-    } else {
-        println("valor invalido")
-    }
-
-    funcao1()
+    //funcao1()
     println("fim main")
 }
 
+
 fun funcao1() {
     println("início funcao1")
-    funcao2()
+    try {
+        funcao2()
+    } catch (e: SaldoInsuficienteException) {
+        e.printStackTrace()
+        println("Saldo insuficiente foi pegado")
+    }
     println("fim funcao1")
 }
 
 fun funcao2() {
     println("início funcao2")
-    try {
-        for (i in 1..5) {
-            println(i)
-            val endereco = Any()
-            endereco as Endereco
-        }
-    } catch (e: java.lang.ClassCastException) {
-//        println(e.message)
-//        println(e.stackTrace)
-//        println(e.cause)
-        e.printStackTrace()
-        println("Class exception")
+    for (i in 1..5) {
+        println(i)
+        val endereco = Any()
+        throw SaldoInsuficienteException()
     }
     println("fim funcao2")
 }
