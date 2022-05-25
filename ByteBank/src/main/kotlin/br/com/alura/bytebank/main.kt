@@ -1,71 +1,53 @@
+import br.com.alura.bytebank.modelo.Autenticavel
+import br.com.alura.bytebank.modelo.Endereco
+import br.com.alura.bytebank.modelo.SistemaInterno
+
 fun main() {
-//    testaTipoFuncaoReferencia()
-//    testaTipoFuncaoClasse()
+//    val endereco = Endereco(logradouro = "rua vergueiro", numero = 3185)
+//    val enderecoEmMaisculo = "${endereco.logradouro}, ${endereco.numero}".toUpperCase()
+//    println(enderecoEmMaisculo)
+    Endereco(
+        logradouro = "rua vergueiro",
+        numero = 3185
+    ).let { endereco ->        //se for o ultimo ou o unico argumento a expressao lambda nao precisa estar nos ()
+        "${endereco.logradouro}, ${endereco.numero}".toUpperCase()
+    }.let(::println)        //como let recebe generics pode enviar uma referencia de uma funcao como argumento
 
-    testaFuncaoLambda()
-    testaFuncaoAnonima()
+    listOf(Endereco(complemento = "casa"), Endereco(), Endereco(complemento = "apartamento"))
+        .filter { endereco -> endereco.complemento != null }
+        .let(::println)
 
-    testaFuncaoLambdaMultiplos()
-    testaFuncaoAnonimaMultiplos()
-}
-
-private fun testaFuncaoAnonimaMultiplos() {
-    val calculaBonificacaoAnonima: (salario: Double) -> Double = fun(salario): Double {
-        if (salario > 1000) {
-            return salario + 50
-        }
-        return salario + 100.0
+    soma(5,7) {valor ->  //soh quando o evento "resultado" acontecer ele sera executado
+        println(valor)                 //pode ser dessa forma, fora da chamada
     }
-    println(calculaBonificacaoAnonima(1100.0))
-}
 
-private fun testaFuncaoLambdaMultiplos() {
-    val calculaBonificacao: (salario: Double) -> Double = lambda@{ salario ->
-        if (salario > 1000) {
-            return@lambda salario + 50
-        }
-        salario + 100.0
+    val autenticavel = object: Autenticavel {
+        val senha = 1234
+        override fun autentica(senha: Int): Boolean = this.senha == senha
     }
-    println(calculaBonificacao(1100.0))
+    SistemaInterno().entra(autenticavel, 1234, autenticado = {            //pode ser dessa forma, dentro da chamada
+        println("realizar pagamento")         //soh executa a high order function depois que o usuario foi autenticado
+    })
 }
 
-private fun testaFuncaoAnonima() {    //utiliza-se quando quer ter certeza o que quer retornar, pois ela nao retorna a ultima instrucao e sim o return
-    val minhaFuncaoAnonima: (Int, Int) -> Int = fun(a, b): Int {          //: () -> Unit, funcao sem nome
-        return a + b                                               // pode utilizar o "_" como na lambda e : () -> Unit, omitir e colocar os argumentos dentro das {}
-    }
-    println("Funcao Anonima: ${minhaFuncaoAnonima(8, 13)}")
+fun soma(a: Int, b: Int, resultado: (Int) -> Unit) {
+    println("Soma sendo efetuada")
+    resultado(a + b)
+    println("depois da som")
 }
 
-private fun testaFuncaoLambda() {
-    val minhaFuncaoLambda = { x: Int, y: Int ->    //: () -> Unit, omitir e colocar os argumentos dentro das {}
-        x + y                                             //a ultima instrucao eh quem determina o retorno
-    }                                               // _,_ se nao quer utilizar um dos parametros da lambda ex: _, b -> b + 10
-    println("Funcao lambda: ${minhaFuncaoLambda(17, 22)}")
+fun testeIntro() {
+    "".let(::testeRecebeString)
+
+    teste(1) {}   //se for o ultimo ou o unico argumento a expressao lambda nao precisa estar nos ()
 }
 
-fun testaTipoFuncaoClasse() {
-    val minhaFuncaoClass = Soma()  //funciona por causa do invoke,
-    // nao necessariamente precisa colocar o tipo funcao (: () -> Unit)
+fun testeRecebeString(valor: String) {
 
-    println("Tipo classe: ${minhaFuncaoClass(7, 5)}")
 }
 
-class Soma : (Int, Int) -> Int {
-    override fun invoke(p1: Int, p2: Int): Int = p1 + p2
-}
-
-fun testaTipoFuncaoReferencia() {
-    val minhaFuncao: (Int, Int) -> Int = ::soma    // funcao -> tipo de retorno = ::referencia da funcao,
-    // nao precisa da inicializacao (: (Int, Int) -> Int), o kotlin pega os argumentos da funcao chamada
-
-    println("Tipo funcao: ${minhaFuncao(3, 5)}")
-}
-
-fun soma(a: Int, b: Int): Int {
-    return a + b
-}
-
-
+//high order function (uma funcao recebendo outra)
+fun teste(teste: Int, bloco: () -> Unit) {}
 
 
 
